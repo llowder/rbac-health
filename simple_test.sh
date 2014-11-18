@@ -62,7 +62,7 @@ declare -r BASE_DN=$(echo ${RET_VAL_PG} |  cut -f30 -d'"')
 declare -r USER_RDN=$(echo ${RET_VAL_PG} |  cut -f34 -d'"')
 declare -r GROUP_RDN=$(echo ${RET_VAL_PG} |  cut -f50 -d'"')
 
-echo "Return value is: 
+echo "Return value is:" 
 
 echo "Hostname: ${HOSTNAME}"
 echo "Port: ${PORT}"
