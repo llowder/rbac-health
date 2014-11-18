@@ -42,6 +42,7 @@ while true; do
     -u|--user)
       pg_user="$2"
       ;;
+    --) shift; break ;;
   esac
 done
 
