@@ -55,12 +55,14 @@ else
 fi
 
 declare -r RET_VAL_PG=$(sudo -u ${pg_user} ${PG_COMMAND} -d pe-rbac -c "SELECT row_to_json(row) FROM ( SELECT id,display_name,help_link,type,hostname,port,ssl,login,connect_timeout,base_dn,user_rdn,user_display_name_attr,user_email_attr,user_lookup_attr,group_rdn,group_object_class,group_name_attr,group_member_attr,group_lookup_attr FROM directory_settings) row" | grep -E '{([^{]*?)}')
-declare -r HOSTNAME=$(echo ${RET_VAL_PG} |  cut -f3 -d'"')
+declare -r HOSTNAME=$(echo ${RET_VAL_PG} |  cut -f16 -d'"')
 declare -r PORT=$(echo ${RET_VAL_PG} | cut -f6  -d',' | cut -f3 -d'"' | cut -f2 -d':')
 declare -r SSL=$(echo ${RET_VAL_PG} | cut -f7 -d',' | cut -f3 -d'"' | cut -f2 -d':')
-declare -r BASE_DN=$(echo ${RET_VAL_PG} |  cut -f3 -d'"')
-declare -r USER_RDN=$(echo ${RET_VAL_PG} |  cut -f3 -d'"')
-declare -r GROUP_RDN=$(echo ${RET_VAL_PG} |  cut -f3 -d'"')
+declare -r BASE_DN=$(echo ${RET_VAL_PG} |  cut -f30 -d'"')
+declare -r USER_RDN=$(echo ${RET_VAL_PG} |  cut -f34 -d'"')
+declare -r GROUP_RDN=$(echo ${RET_VAL_PG} |  cut -f50 -d'"')
+
+echo "Return value is: 
 
 echo "Hostname: ${HOSTNAME}"
 echo "Port: ${PORT}"
